@@ -154,7 +154,6 @@ const TaskEdit = ({
           <button
             type="submit"
             className="btn btn-success text-white fs-5 rounded w-25 h-50"
-            // onClick={handleAddTask}
           >
             {type === "edit" ? "Update Task" : "Add Task"}
           </button>

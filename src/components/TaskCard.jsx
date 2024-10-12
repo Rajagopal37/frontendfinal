@@ -15,7 +15,17 @@ const TaskCard = ({
           <p className="card-text">{description}</p>
           <p className="card-text">Assign Date: {assignDate}</p>
           <p className="card-text">Last Date: {lastDate}</p>
-          <p className="card-text">Status: {status}</p>
+
+          <p className="card-text text-center fs-5">
+            <span
+              className={`badge ${
+                status === "Completed" ? "bg-success" : "bg-danger"
+              }`}
+            >
+              {status}
+            </span>
+          </p>
+
           <p className="card-text text-center fw-bold">
             Remaining Days:{" "}
             {Math.ceil(
