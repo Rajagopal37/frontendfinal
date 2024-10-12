@@ -8,13 +8,19 @@ const TaskCard = ({
   onDelete,
 }) => {
   return (
-    <div className="col-md-3 m-3">
-      <div className="card mb-3">
-        <div className="card-body">
-          <h5 className="card-title">{name}</h5>
+    <div className="col-md-3 m-auto">
+      <div className="card m-3 border border-2 border-primary rounded-4">
+        <div className="card-body ">
+          <h5 className="card-title text-center ">{name}</h5>
           <p className="card-text">{description}</p>
-          <p className="card-text">Assign Date: {assignDate}</p>
-          <p className="card-text">Last Date: {lastDate}</p>
+          <p className="card-text">
+            Assign Date:
+            {new Date(assignDate).toLocaleDateString()}
+          </p>
+          <p className="card-text">
+            Last Date:
+            {new Date(lastDate).toLocaleDateString()}
+          </p>
 
           <p className="card-text text-center fs-5">
             <span
@@ -33,16 +39,21 @@ const TaskCard = ({
             )}
           </p>
 
-          {/* <button className="btn btn-primary" onClick={onSave}>
-            <i className="bi bi-check-square"></i>
-          </button> */}
-          <button className="btn btn-success" onClick={onEdit}>
-            <i className="bi bi-pencil-square"></i>
-          </button>
+          <div className="d-flex justify-content-evenly">
+            <button
+              className="btn border border-2 border-primary"
+              onClick={onEdit}
+            >
+              <i className="bi bi-pencil-square"></i>
+            </button>
 
-          <button className="btn btn-danger" onClick={onDelete}>
-            <i className="bi bi-trash3"></i>
-          </button>
+            <button
+              className="btn border border-2 border-danger"
+              onClick={onDelete}
+            >
+              <i className="bi bi-trash3"></i>
+            </button>
+          </div>
         </div>
       </div>
     </div>

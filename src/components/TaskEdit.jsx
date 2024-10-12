@@ -93,7 +93,7 @@ const TaskEdit = ({
   };
 
   return (
-    <div>
+    <div className="">
       <form className="mb-3" onSubmit={handleAddTask}>
         <div className="form-group">
           <input
@@ -153,16 +153,14 @@ const TaskEdit = ({
         <div className="d-flex justify-content-center">
           <button
             type="submit"
-            className="btn btn-success text-white fs-5 rounded w-25 h-50"
+            className="btn btn-success text-white fs-5 rounded w-25 h-50 m-2"
           >
             {type === "edit" ? "Update Task" : "Add Task"}
           </button>
-        </div>
 
-        <div className="d-flex justify-content-center mt-2">
           <button
             type="button"
-            className="btn btn-danger text-white fs-5 rounded w-25 h-50"
+            className="btn btn-danger text-white fs-5 rounded w-25 h-50 m-2"
             onClick={onClose}
           >
             Close
