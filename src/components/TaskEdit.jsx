@@ -124,7 +124,7 @@ const TaskEdit = ({
             name="assignDate"
             className="form-control m-2 w-75"
             value={assignDate}
-            onChange={({ target }) => setAssignDate(target.value)}
+            onChange={({ target }) => setAssignDate(target.value).split("T")[0]}
           />
           <p className="text-center m-2 text-danger fw-bolder">Finish Date</p>
           <input
@@ -141,7 +141,7 @@ const TaskEdit = ({
           <select
             className="form-control"
             value={status}
-            onChange={(e) => setStatus(e.target.value).split("T")[0]}
+            onChange={(e) => setStatus(e.target.value)}
           >
             <option value="Incomplete">Incomplete</option>
             <option value="Completed">Completed</option>
