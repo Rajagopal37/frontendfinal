@@ -1,19 +1,22 @@
 import { useState } from "react";
 import { Navbar } from "./Navbar";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import PasswordInput from "./PasswordInput";
 import { validateMail } from "../utils/helper";
+import axiosInstance from "../utils/axiosInstance";
 
-const Login = () => {
-  const [fullName, setFullName] = useState("");
+const Signup = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
 
-  const handleLogin = async (e) => {
+  const navigate = useNavigate();
+
+  const handleSignup = async (e) => {
     e.preventDefault();
 
-    if (!fullName) {
+    if (!name) {
       setError("Please Enter Your Fullname");
       return;
     }
@@ -28,10 +31,38 @@ const Login = () => {
       return;
     }
 
-    console.log("Form submitted with:", { fullName, email, password });
     setError("");
 
-    // Login API
+    // Signup API
+    try {
+      const response = await axiosInstance.post("/create-account", {
+        fullName: name,
+        email: email,
+        password: password,
+      });
+
+      // Handle successful registration response
+      if (response.data && response.data.error) {
+        setError(response.data.message);
+        return;
+      }
+
+      if (response.data && response.data.accessToken) {
+        localStorage.setItem("token", response.data.accessToken);
+        navigate("/login");
+      }
+    } catch (error) {
+      // Handle login error
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setError(error.response.data.message);
+      } else {
+        setError("An unexpected error occurred. Please try again.");
+      }
+    }
   };
 
   return (
@@ -39,7 +70,7 @@ const Login = () => {
       <Navbar />
       <div className="d-flex justify-content-center align-items-center mt-5">
         <div className="m-3 p-3 w-50 border border-3 border-primary rounded d-flex justify-content-center align-items-center">
-          <form onSubmit={handleLogin} className="m-3 p-1 w-75">
+          <form onSubmit={handleSignup} className="m-3 p-1 w-75">
             <h3 className="mb-4 d-flex justify-content-center text-primary">
               Create an Account
             </h3>
@@ -47,10 +78,10 @@ const Login = () => {
             <div className="form-group m-3 w-100">
               <input
                 type="text"
-                placeholder="Fullname"
+                placeholder="Full Name"
                 className="form-control mb-2"
-                value={fullName}
-                onChange={(e) => setFullName(e.target.value)}
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
 
@@ -80,9 +111,9 @@ const Login = () => {
               </button>
             </div>
 
-            <div className="text-center my-3">
-              Already Have An Account. Kindly <Link to="/login">Login</Link>
-            </div>
+            <p className="text-center my-3">
+              Already Have An Account ?. Kindly <Link to="/login">Login</Link>
+            </p>
           </form>
         </div>
       </div>
@@ -90,4 +121,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

@@ -3,9 +3,12 @@ import ProfileInfo from "./ProfileInfo";
 import { useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
+  const isToken = localStorage.getItem("token");
+
   const navigate = useNavigate;
 
   const onLogout = () => {
+    localStorage.clear();
     navigate("/login");
   };
 
@@ -20,7 +23,7 @@ export const Navbar = () => {
       }}
     >
       <h2 className="text-primary ps-4 m-2"> Task Manager</h2>
-      <ProfileInfo onLogout={onLogout} />
+      {isToken && <ProfileInfo onLogout={onLogout} />}
     </div>
   );
 };
