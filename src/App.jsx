@@ -10,6 +10,7 @@ const routes = (
     <Routes>
       <Route path="/dashboard" element={<Home />}></Route>
       <Route path="/login" element={<Login />}></Route>
+      <Route path="/" element={<Login />}></Route>
       <Route path="/signup" element={<Singup />}></Route>
     </Routes>
   </Router>
