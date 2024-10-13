@@ -14,27 +14,6 @@ const Home = () => {
   const [filter, setFilter] = useState("All");
   const navigate = useNavigate();
 
-  const [showToastMsg, setShowToastMsg] = useState({
-    isShown: false,
-    message: "",
-    type: "add",
-  });
-
-  const showToastMessage = (message, type) => {
-    setShowToastMsg({
-      isShown: true,
-      message: message,
-      type,
-    });
-  };
-
-  const handleCloseToast = () => {
-    setShowToastMsg({
-      isShown: false,
-      message: "",
-    });
-  };
-
   const [openTaskAddEditModal, setOpenTaskAddEditModal] = useState({
     isShown: false,
     type: "add",

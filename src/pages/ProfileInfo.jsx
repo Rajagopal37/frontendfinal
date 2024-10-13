@@ -14,8 +14,8 @@ const ProfileInfo = (userInfo, onLogout) => {
           </span>
           <button
             className="btn btn-link text-danger fw-medium"
-            onClick={onLogout}
             style={{ textDecoration: "none", fontSize: "1.1rem" }}
+            onClick={onLogout}
           >
             Logout
           </button>

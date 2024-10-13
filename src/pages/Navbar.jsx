@@ -2,7 +2,7 @@ import React from "react";
 import ProfileInfo from "./ProfileInfo";
 import { useNavigate } from "react-router-dom";
 
-export const Navbar = () => {
+export const Navbar = (userInfo) => {
   const isToken = localStorage.getItem("token");
 
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ export const Navbar = () => {
       }}
     >
       <h2 className="text-primary ps-4 m-2"> Task Manager</h2>
-      {isToken && <ProfileInfo onLogout={onLogout} />}
+      {isToken && <ProfileInfo userInfo={userInfo} onLogout={onLogout} />}
     </div>
   );
 };
