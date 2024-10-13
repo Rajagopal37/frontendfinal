@@ -11,7 +11,7 @@ Modal.setAppElement("#root");
 const Home = () => {
   const [userInfo, setUserInfo] = useState(null);
   const [allTasks, setAllTasks] = useState([]);
-
+  const [filter, setFilter] = useState("All");
   const navigate = useNavigate();
 
   const [showToastMsg, setShowToastMsg] = useState({
@@ -99,6 +99,24 @@ const Home = () => {
     }
   };
 
+  // Calculate task counts
+  const totalTasks = allTasks.length;
+  const completedTasks = allTasks.filter(
+    (task) => task.status === "Completed"
+  ).length;
+  const incompleteTasks = allTasks.filter(
+    (task) => task.status === "Incomplete"
+  ).length;
+
+  // Filter tasks based on the selected status
+  const filteredTasks = allTasks.filter((task) => {
+    if (filter === "All") return true;
+    return task.status === filter;
+  });
+
+  console.log("Filter:", filter); // Log the current filter
+  console.log("Filtered Tasks:", filteredTasks); // Log the filtered tasks
+
   useEffect(() => {
     getAllTasks();
     getUserInfo();
@@ -108,7 +126,21 @@ const Home = () => {
     <div className="d-flex flex-column">
       <Navbar userInfo={userInfo} />
 
-      <div className="d-flex justify-content-center mt-3">
+      <div className="d-flex justify-content-between m-5">
+        {/* Status Filter */}
+        <div className="mb-3">
+          <label>Status Filter: </label>
+          <select
+            className="ms-2"
+            value={filter}
+            onChange={(e) => setFilter(e.target.value)} // Update filter state on change
+          >
+            <option value="All">All</option>
+            <option value="Completed">Completed</option>
+            <option value="Incomplete">Incomplete</option>
+          </select>
+        </div>
+
         <button
           className="btn btn-primary text-white fs-5 rounded w-25 h-50"
           onClick={() => {
@@ -121,11 +153,24 @@ const Home = () => {
         >
           Click to Add Task
         </button>
+
+        {/* Task Counts */}
+        <div className="d-flex align-items-center">
+          <span className="bg-primary text-white fw-bold  px-3 py-2 mx-1 rounded-circle ">
+            {totalTasks}
+          </span>
+          <span className="bg-success text-white fw-bold   px-3 py-2 mx-1 rounded-circle">
+            {completedTasks}
+          </span>
+          <span className="bg-danger text-white fw-bold  px-3 py-2 mx-1 rounded-circle">
+            {incompleteTasks}
+          </span>
+        </div>
       </div>
 
-      {allTasks.length > 0 ? (
+      {filteredTasks.length > 0 ? (
         <div className="d-flex flex-wrap m-5">
-          {allTasks.map((task) => {
+          {filteredTasks.map((task) => {
             return (
               <TaskCard
                 key={task._id}
@@ -141,7 +186,7 @@ const Home = () => {
           })}
         </div>
       ) : (
-        "No Tasks. Create a new Task"
+        " Press click to Add task and Create new Task "
       )}
 
       <Modal
