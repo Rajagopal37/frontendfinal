@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 export const Navbar = () => {
   const isToken = localStorage.getItem("token");
 
-  const navigate = useNavigate;
+  const navigate = useNavigate();
 
   const onLogout = () => {
     localStorage.clear();
