@@ -43,12 +43,12 @@ const Signup = () => {
 
       // Handle successful registration response
       if (response.data && response.data.error) {
-        alert("Account Created Successfully. Please Login");
         setError(response.data.message);
         return;
       }
 
       if (response.data && response.data.accessToken) {
+        alert("Account Created Successfully. Please Login");
         localStorage.setItem("token", response.data.accessToken);
         navigate("/login");
       }
