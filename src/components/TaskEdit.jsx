@@ -14,6 +14,22 @@ const TaskEdit = ({ taskData, type, onClose, getAllTasks }) => {
 
   const [error, setError] = useState(null);
 
+  const handleAddTask = (e) => {
+    e.preventDefault();
+
+    if (!name) return setError("Please Enter a task name");
+    if (!description) return setError("Please Enter the description ");
+    if (!assignDate) return setError("Please Enter the task Assign Date");
+    if (!lastDate) return setError("Please Enter the task Finish name");
+
+    if (type === "edit") {
+      editTask();
+    } else {
+      addNewTask();
+    }
+    setError("");
+  };
+
   const addNewTask = async () => {
     try {
       const response = await axiosInstance.post("/add-task", {
@@ -69,20 +85,6 @@ const TaskEdit = ({ taskData, type, onClose, getAllTasks }) => {
         setError("An unexpected error occurred. Please try again.");
       }
     }
-  };
-
-  const handleAddTask = () => {
-    if (!name) return setError("Please Enter a task name");
-    if (!description) return setError("Please Enter the description ");
-    if (!assignDate) return setError("Please Enter the task Assign Date");
-    if (!lastDate) return setError("Please Enter the task Finish name");
-
-    if (type === "edit") {
-      editTask();
-    } else {
-      addNewTask();
-    }
-    setError("");
   };
 
   return (
