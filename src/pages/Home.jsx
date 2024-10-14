@@ -52,10 +52,10 @@ const Home = () => {
     try {
       const response = await axiosInstance.get("/all-tasks");
 
-      console.log("Tasks response:", response.data); // Log response for debugging
+      console.log("Tasks response:", response.data);
 
       if (response.data && response.data.tasks) {
-        setAllTasks(response.data.tasks); // Correct usage of 'tasks'
+        setAllTasks(response.data.tasks);
       } else {
         console.log("Tasks not found in the response.");
       }

@@ -1,13 +1,7 @@
 import { useState } from "react";
 import axiosInstance from "../utils/axiosInstance";
 
-const TaskEdit = ({
-  taskData,
-  type,
-  onClose,
-  showToastMessage,
-  getAllTasks,
-}) => {
+const TaskEdit = ({ taskData, type, onClose, getAllTasks }) => {
   const [name, setName] = useState(taskData?.name || "");
   const [description, setDescription] = useState(taskData?.description || "");
   const [assignDate, setAssignDate] = useState(
@@ -45,7 +39,7 @@ const TaskEdit = ({
       });
 
       if (response.data && response.data.task) {
-        showToastMessage("Task Added Successfully");
+        alert("Task Added Successfully");
         getAllTasks();
         onClose();
       }
@@ -75,7 +69,7 @@ const TaskEdit = ({
       });
 
       if (response.data && response.data.task) {
-        showToastMessage("Task Updated Successfully");
+        alert("Task Updated Successfully");
         getAllTasks();
         onClose();
       }
