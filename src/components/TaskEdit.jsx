@@ -14,21 +14,6 @@ const TaskEdit = ({ taskData, type, onClose, getAllTasks }) => {
 
   const [error, setError] = useState(null);
 
-  const handleAddTask = () => {
-    if (!name) return setError("Please Enter a task name");
-    if (!description) return setError("Please Enter the description ");
-    if (!assignDate) return setError("Please Enter the task Assign Date");
-    if (!lastDate) return setError("Please Enter the task Finish name");
-
-    if (type === "edit") {
-      editTask();
-    } else {
-      addNewTask();
-    }
-
-    setError("");
-  };
-
   const addNewTask = async () => {
     try {
       const response = await axiosInstance.post("/add-task", {
@@ -86,9 +71,23 @@ const TaskEdit = ({ taskData, type, onClose, getAllTasks }) => {
     }
   };
 
+  const handleAddTask = () => {
+    if (!name) return setError("Please Enter a task name");
+    if (!description) return setError("Please Enter the description ");
+    if (!assignDate) return setError("Please Enter the task Assign Date");
+    if (!lastDate) return setError("Please Enter the task Finish name");
+
+    if (type === "edit") {
+      editTask();
+    } else {
+      addNewTask();
+    }
+    setError("");
+  };
+
   return (
     <div className="">
-      <form className="mb-3" onSubmit={handleAddTask}>
+      <form className="mb-3">
         <div className="form-group">
           <input
             type="text"
@@ -148,6 +147,7 @@ const TaskEdit = ({ taskData, type, onClose, getAllTasks }) => {
           <button
             type="submit"
             className="btn btn-success text-white fs-5 rounded w-25 h-50 m-2"
+            onClick={handleAddTask}
           >
             {type === "edit" ? "Update Task" : "Add Task"}
           </button>
