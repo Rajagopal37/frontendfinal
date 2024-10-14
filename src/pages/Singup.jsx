@@ -43,6 +43,7 @@ const Signup = () => {
 
       // Handle successful registration response
       if (response.data && response.data.error) {
+        alert("Account Created Successfully. Please Login");
         setError(response.data.message);
         return;
       }
